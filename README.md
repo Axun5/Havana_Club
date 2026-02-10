@@ -9,7 +9,7 @@ Vstupem na tento web potvrzujete, že:
 1. Je vám více než 18 let (nebo alespoň vypadáte dost staře na to, aby vám v obchodě prodali nealko pivo).
 2. Vaše játra jsou připravena na nálož CSS stylů.
 3. **NEJSTE MAREK HODNÝ.** 🚫*
-4. Pokud jste učitel, automaticky dáváte za 1, protože alkohol (i ten digitální) se v hodině toleruje jen za skvělý kód! 📝✅
+4. Pokud jste vyučující: Vstupem potvrzujete, že tento kód hodnotíte známkou 1. Je vědecky dokázáno, že digitální rum chutná nejlépe pod tlakem termínů, a podle školního řádu (paragraf 42, odstavec "Kuba") se skvělý frontend automaticky mění na výborný prospěch! 📝✅
 
 * ### ⛔ BLACKLIST: Marek Hodný
 Z bezpečnostních, etických a pravděpodobně i vesmírných důvodů má **Marek Hodný** přísný zákaz vstupu na tuto stránku. 
