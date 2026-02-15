@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Havana Club Añejo 3 Años",
+    "age": 3,
+    "price": 399,
+    "alcohol": 40,
+    "category": "White",
+    "image": "/public/images/hc3.png"
+  },
+  {
+    "id": 2,
+    "name": "Havana Club Añejo 7 Años",
+    "age": 7,
+    "price": 599,
+    "alcohol": 40,
+    "category": "Dark",
+    "image": "/public/images/hc7.png"
+  },
+  {
+    "id": 3,
+    "name": "Havana Club Selección de Maestros",
+    "age": 10,
+    "price": 1290,
+    "alcohol": 45,
+    "category": "Premium",
+    "image": "/public/images/maestros.png"
+  }
+]
