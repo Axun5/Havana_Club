@@ -22,14 +22,28 @@ function loadRums() {
     }
 }
 
+function formatAge(age) {
+    if (age === 1) {
+        return "1 rok";
+    }
+
+    if (age >= 2 && age <= 4) {
+        return age + " roky";
+    }
+
+    return age + " let";
+}
+
 function serveStaticFile(res, filePath) {
     const fullPath = path.join(__dirname, filePath);
     const ext = path.extname(fullPath).toLowerCase();
 
     const mimeTypes = {
         ".css": "text/css",
+        ".js": "text/javascript",
         ".png": "image/png",
-        ".jpg": "image/jpeg"
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg"
     };
 
     fs.readFile(fullPath, function (err, data) {
@@ -45,26 +59,7 @@ function serveStaticFile(res, filePath) {
     });
 }
 
-const server = http.createServer(function (req, res) {
-
-    if (req.url.startsWith("/public/")) {
-        return serveStaticFile(res, req.url.substring(1));
-    }
-
-    if (req.url === "/" && req.method === "GET") {
-        const rums = loadRums();
-
-        let rumList = "";
-        for (let i = 0; i < rums.length; i++) {
-            rumList += "<tr>";
-            rumList += "<td>" + rums[i].name + "</td>";
-            rumList += "<td>" + rums[i].age + " let</td>";
-            rumList += "<td>" + rums[i].alcohol + " %</td>";
-            rumList += "<td>" + rums[i].price + " Kč</td>";
-            rumList += "</tr>";
-        }
-
-        const html = `
+const HTML_HEAD = `
 <!doctype html>
 <html lang="cs">
 <head>
@@ -74,27 +69,67 @@ const server = http.createServer(function (req, res) {
 </head>
 <body>
     <header>
-        <h1>Havana Club - Skladová Evidence</h1>
+        <a href="/">
+            <img src="/public/images/logo.png" alt="Havana Club" class="logo">
+        </a>
+        <h1>Skladová Evidence</h1>
     </header>
+`;
 
-    <h2>Seznam rumů</h2>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Název</th>
-            <th>Věk</th>
-            <th>Alkohol</th>
-            <th>Cena</th>
-        </tr>
-        ${rumList}
-    </table>
-
+const HTML_FOOTER = `
     <footer>
-        <p>&copy; 2026 Havana Club Sklad</p>
+        <p>&copy; 2026 Havana Club Sklad. Všechna práva vyhrazena.</p>
+        <p>
+            Vytvořil
+            <a href="https://adamkoukal.cz" target="_blank" class="author-link">Adam Koukal</a>
+        </p>
     </footer>
 </body>
 </html>
-        `;
+`;
 
+function renderMainPage(rums) {
+    let cards = "";
+
+    for (let i = 0; i < rums.length; i++) {
+        const r = rums[i];
+
+        cards += `
+        <div class="card">
+            <div class="card-image">
+                <img src="${r.image}" alt="${r.name}">
+            </div>
+            <div class="card-info">
+                <h3>${r.name}</h3>
+                <div class="badges">
+                    <span>${formatAge(r.age)}</span>
+                    <span>${r.category}</span>
+                    <span>${r.alcohol}% alk.</span>
+                </div>
+                <div class="price-tag">${r.price} Kč</div>
+            </div>
+        </div>
+        `;
+    }
+
+    return `
+    ${HTML_HEAD}
+    <div class="grid-container">
+        ${cards}
+    </div>
+    ${HTML_FOOTER}
+    `;
+}
+
+const server = http.createServer(function (req, res) {
+
+    if (req.url.startsWith("/public/")) {
+        return serveStaticFile(res, req.url.substring(1));
+    }
+
+    if (req.url === "/" && req.method === "GET") {
+        const rums = loadRums();
+        const html = renderMainPage(rums);
         res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
         res.end(html);
         return;
