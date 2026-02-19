@@ -55,6 +55,36 @@ footer p {
 .author-link:hover {
     color: #FCD667;
 }
+.top-bar {
+    text-align: center;
+    margin: 25px 0 0 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    color: white;
+}
+
+.btn-add {
+    background-color: #D3122A;
+}
+
+.btn-add:hover {
+    background-color: #b8101e;
+}
+
+.btn-back {
+    background-color: #888;
+}
+
+.btn-back:hover {
+    background-color: #666;
+}
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -115,4 +145,50 @@ footer p {
     color: #D3122A;
     font-weight: bold;
     margin: 15px 0 0 0;
+}
+.form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    color: #D3122A;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #D3122A;
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
 }
