@@ -10,8 +10,7 @@ function loadRums() {
         if (!fs.existsSync(DATA_FILE)) {
             return [];
         }
-
-        const data = fs.readFileSync(DATA_FILE, "utf-8");
+        var data = fs.readFileSync(DATA_FILE, "utf-8");
         return JSON.parse(data);
     } catch (chyba) {
         console.error("Chyba pri nacitani:", chyba);
@@ -24,20 +23,16 @@ function saveRums(rums) {
 }
 
 function formatAge(age) {
-    if (age === 1) {
-        return "1 rok";
-    }
-    if (age >= 2 && age <= 4) {
-        return age + " roky";
-    }
+    if (age === 1) return "1 rok";
+    if (age >= 2 && age <= 4) return age + " roky";
     return age + " let";
 }
 
 function serveStaticFile(res, filePath) {
-    const fullPath = path.join(__dirname, filePath);
-    const ext = path.extname(fullPath).toLowerCase();
+    var fullPath = path.join(__dirname, filePath);
+    var ext = path.extname(fullPath).toLowerCase();
 
-    const mimeTypes = {
+    var mimeTypes = {
         ".css": "text/css",
         ".js": "text/javascript",
         ".png": "image/png",
@@ -51,7 +46,6 @@ function serveStaticFile(res, filePath) {
             res.end("Soubor nenalezen");
             return;
         }
-
         var contentType = mimeTypes[ext] || "text/plain";
         res.writeHead(200, { "Content-Type": contentType });
         res.end(data);
@@ -106,6 +100,11 @@ function renderMainPage(rums) {
                     <span>${r.alcohol}% alk.</span>
                 </div>
                 <div class="price-tag">${r.price} Kč</div>
+            </div>
+            <div class="actions">
+                <a href="/edit/${r.id}" class="btn btn-edit">Upravit</a>
+                <a href="/delete/${r.id}" class="btn btn-delete"
+                   onclick="return confirm('Opravdu smazat tento rum?')">Smazat</a>
             </div>
         </div>
         `;
@@ -186,22 +185,18 @@ function renderFormPage(rum) {
 
 function parseBody(req, callback) {
     var body = "";
-
     req.on("data", function (chunk) {
         body += chunk.toString();
     });
-
     req.on("end", function () {
         var params = {};
         var pairs = body.split("&");
-
         for (var i = 0; i < pairs.length; i++) {
             var parts = pairs[i].split("=");
             var key = decodeURIComponent(parts[0]);
             var value = decodeURIComponent(parts[1] || "").replace(/\+/g, " ");
             params[key] = value;
         }
-
         callback(params);
     });
 }
@@ -232,12 +227,9 @@ var server = http.createServer(function (req, res) {
     if (pathname === "/add" && req.method === "POST") {
         parseBody(req, function (params) {
             var rums = loadRums();
-
             var maxId = 0;
             for (var i = 0; i < rums.length; i++) {
-                if (rums[i].id > maxId) {
-                    maxId = rums[i].id;
-                }
+                if (rums[i].id > maxId) maxId = rums[i].id;
             }
 
             var newRum = {
@@ -256,6 +248,73 @@ var server = http.createServer(function (req, res) {
             res.writeHead(302, { "Location": "/" });
             res.end();
         });
+        return;
+    }
+
+    var editMatch = pathname.match(/^\/edit\/(\d+)$/);
+    if (editMatch && req.method === "GET") {
+        var id = parseInt(editMatch[1]);
+        var rums = loadRums();
+        var rum = null;
+
+        for (var i = 0; i < rums.length; i++) {
+            if (rums[i].id === id) {
+                rum = rums[i];
+                break;
+            }
+        }
+
+        if (!rum) {
+            res.writeHead(404);
+            res.end("Rum nenalezen");
+            return;
+        }
+
+        var html = renderFormPage(rum);
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.end(html);
+        return;
+    }
+
+    if (editMatch && req.method === "POST") {
+        var id = parseInt(editMatch[1]);
+        parseBody(req, function (params) {
+            var rums = loadRums();
+
+            for (var i = 0; i < rums.length; i++) {
+                if (rums[i].id === id) {
+                    rums[i].name = params.name || rums[i].name;
+                    rums[i].age = parseInt(params.age) || 0;
+                    rums[i].price = parseInt(params.price) || 0;
+                    rums[i].alcohol = parseFloat(params.alcohol) || 0;
+                    rums[i].category = params.category || rums[i].category;
+                    rums[i].image = params.image || rums[i].image;
+                    break;
+                }
+            }
+
+            saveRums(rums);
+            res.writeHead(302, { "Location": "/" });
+            res.end();
+        });
+        return;
+    }
+
+    var deleteMatch = pathname.match(/^\/delete\/(\d+)$/);
+    if (deleteMatch && req.method === "GET") {
+        var id = parseInt(deleteMatch[1]);
+        var rums = loadRums();
+        var newRums = [];
+
+        for (var i = 0; i < rums.length; i++) {
+            if (rums[i].id !== id) {
+                newRums.push(rums[i]);
+            }
+        }
+
+        saveRums(newRums);
+        res.writeHead(302, { "Location": "/" });
+        res.end();
         return;
     }
 

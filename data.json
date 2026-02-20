@@ -43,5 +43,23 @@
     "alcohol": 37.5,
     "category": "Spiced",
     "image": "/public/images/ritual.png"
+  },
+  {
+    "id": 6,
+    "name": "Havana Club Gran Reserva 15 Años",
+    "age": 15,
+    "price": 2890,
+    "alcohol": 40,
+    "category": "Premium",
+    "image": "/public/images/hc15.png"
+  },
+  {
+    "id": 7,
+    "name": "Havana Club Cuban Smoky",
+    "age": 0,
+    "price": 799,
+    "alcohol": 40,
+    "category": "Spiced",
+    "image": "/public/images/smoky.png"
   }
 ]

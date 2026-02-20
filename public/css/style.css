@@ -59,7 +59,6 @@ footer p {
     text-align: center;
     margin: 25px 0 0 0;
 }
-
 .btn {
     display: inline-block;
     padding: 10px 25px;
@@ -85,6 +84,26 @@ footer p {
 .btn-back:hover {
     background-color: #666;
 }
+
+.btn-edit {
+    background-color: #1a1a1a;
+    font-size: 0.85em;
+    padding: 8px 15px;
+}
+
+.btn-edit:hover {
+    background-color: #333;
+}
+
+.btn-delete {
+    background-color: #D3122A;
+    font-size: 0.85em;
+    padding: 8px 15px;
+}
+
+.btn-delete:hover {
+    background-color: #b8101e;
+}
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -99,6 +118,8 @@ footer p {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
@@ -123,6 +144,7 @@ footer p {
 .card-info {
     padding: 20px;
     text-align: center;
+    flex-grow: 1;
 }
 
 .card-info h3 {
@@ -145,6 +167,16 @@ footer p {
     color: #D3122A;
     font-weight: bold;
     margin: 15px 0 0 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    margin-top: auto;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
 }
 .form-container {
     max-width: 600px;
@@ -191,4 +223,10 @@ footer p {
     display: flex;
     gap: 15px;
     margin-top: 25px;
+}
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
 }
