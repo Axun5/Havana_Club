@@ -61,5 +61,14 @@
     "alcohol": 40,
     "category": "Spiced",
     "image": "/public/images/smoky.png"
+  },
+  {
+    "id": 8,
+    "name": "Havana Club Unión",
+    "age": 25,
+    "price": 8900,
+    "alcohol": 40,
+    "category": "Premium",
+    "image": "/public/images/union.png"
   }
 ]
