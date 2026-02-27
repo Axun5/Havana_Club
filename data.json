@@ -5,8 +5,10 @@
     "age": 3,
     "price": 399,
     "alcohol": 40,
+    "volume": 0.7,
     "category": "White",
-    "image": "/public/images/hc3.png"
+    "image": "/public/images/hc3.png",
+    "description": "Lehký a svěží bílý rum zrající 3 roky v dubových sudech. Ideální základ pro koktejly jako Mojito nebo Daiquiri. Vyznačuje se jemnou vůní vanilky, karamelu a tropického ovoce. Na patře zanechává hladký a čistý dojem s nádechem hrušky a banánu."
   },
   {
     "id": 2,
@@ -14,8 +16,10 @@
     "age": 7,
     "price": 599,
     "alcohol": 40,
+    "volume": 0.7,
     "category": "Dark",
-    "image": "/public/images/hc7.png"
+    "image": "/public/images/hc7.png",
+    "description": "Sedmiletý tmavý rum s bohatým a komplexním charakterem. Zraje v dubových sudech a nabízí tóny tabáku, kakaa, vanilky a sušeného ovoce. Ideální na popíjení samotný nebo s ledem. Je to vlajková loď značky Havana Club a jeden z nejoblíbenějších kubánských rumů na světě."
   },
   {
     "id": 3,
@@ -23,8 +27,10 @@
     "age": 10,
     "price": 1290,
     "alcohol": 45,
+    "volume": 0.75,
     "category": "Premium",
-    "image": "/public/images/maestros.png"
+    "image": "/public/images/maestros.png",
+    "description": "Prémiový rum ručně vybraný kubánskými Maestros del Ron. Zraje minimálně 10 let a vyniká složitou chutí s tóny tmavé čokolády, pražených ořechů, medu a kouře. Vyšší obsah alkoholu 45 % dodává výrazný a plný charakter. Nejlepší je vychutnat si ho čistý v degustační skleničce."
   },
   {
     "id": 4,
@@ -32,8 +38,10 @@
     "age": 5,
     "price": 449,
     "alcohol": 40,
+    "volume": 1,
     "category": "Gold",
-    "image": "/public/images/especial.png"
+    "image": "/public/images/especial.png",
+    "description": "Zlatý rum střední zralosti s vyváženou chutí. Pětiletým zráním v dubových sudech získává jantarovou barvu a příjemnou sladkost. V chuti najdete tóny vanilky, karamelu a dřeva. Skvělý do koktejlu Cuba Libre nebo na popíjení s kvalitním tonikem."
   },
   {
     "id": 5,
@@ -41,26 +49,32 @@
     "age": 0,
     "price": 350,
     "alcohol": 37.5,
+    "volume": 0.7,
     "category": "Spiced",
-    "image": "/public/images/ritual.png"
+    "image": "/public/images/ritual.png",
+    "description": "Kořeněný kubánský rum inspirovaný tradicemi ostrova. Obsahuje přírodní extrakty koření, citrusů a tropického ovoce. Nižší obsah alkoholu 37,5 % z něj dělá přístupný nápoj i pro začátečníky. Výborný v kombinaci se zázvorovým pivem nebo jako základ pro zimní koktejly."
   },
   {
     "id": 6,
     "name": "Havana Club Gran Reserva 15 Años",
     "age": 15,
-    "price": 2890,
+    "price": 3990,
     "alcohol": 40,
+    "volume": 0.75,
     "category": "Premium",
-    "image": "/public/images/hc15.png"
+    "image": "/public/images/hc15.png",
+    "description": "Exkluzivní rum zrající plných 15 let v kubánských dubových sudech. Disponuje mimořádně bohatou a komplexní chutí s tóny sušeného ovoce, koření, kůže a dýmkového tabáku. Barva je sytě mahagonová. Tento rum je určen výhradně pro pomalé vychutnávání a je oslavou kubánského řemesla."
   },
   {
     "id": 7,
     "name": "Havana Club Cuban Smoky",
-    "age": 0,
-    "price": 799,
+    "age": 3,
+    "price": 650,
     "alcohol": 40,
-    "category": "Spiced",
-    "image": "/public/images/smoky.png"
+    "volume": 0.7,
+    "category": "Dark",
+    "image": "/public/images/smoky.png",
+    "description": "Unikátní uzený rum vyrobený speciálním postupem s využitím kubánského dřeva. Kombinuje klasický charakter tříletého rumu s výraznými uzenými tóny. V chuti se mísí karamel, dým a jemná pálivost. Ideální pro milovníky whisky, kteří chtějí objevit svět rumu."
   },
   {
     "id": 8,
@@ -68,7 +82,31 @@
     "age": 25,
     "price": 8900,
     "alcohol": 40,
+    "volume": 0.75,
     "category": "Premium",
-    "image": "/public/images/union.png"
+    "image": "/public/images/union.png",
+    "description": "Mistrovské dílo propojující svět kubánského rumu a doutníků. Rum zraje 25 let a je vytvořen ve spolupráci s tabákovými mistry. Nabízí luxusní chuťový profil s tóny cedru, kůže, vanilky a jemného kouře. Každá láhev je číslovaná a balená v elegantní dárkové kazetě."
+  },
+  {
+    "id": 9,
+    "name": "Havana Club Verde",
+    "age": 1,
+    "price": 420,
+    "alcohol": 35,
+    "volume": 0.7,
+    "category": "White",
+    "image": "/public/images/verde.png",
+    "description": "Mladý a hravý rum s nižším obsahem alkoholu, navržený pro moderní koktejly. Zraje jeden rok a vyznačuje se svěží chutí s tóny zeleného jablka, máty a citrusů. Perfektní volba do letního Mojita nebo Spritz drinku. Cílí na mladší generaci milovníků kvalitních nápojů."
+  },
+  {
+    "id": 10,
+    "name": "Havana Club Máximo Extra Añejo",
+    "age": 50,
+    "price": 35000,
+    "alcohol": 40,
+    "volume": 0.5,
+    "category": "Premium",
+    "image": "/public/images/maximo.png",
+    "description": "Absolutní vrchol kubánského rumového řemesla. Blend těch nejstarších rumů v zásobách Havana Clubu, z nichž některé zrají přes 50 let. Každá láhev je ručně vyrobena z křišťálového skla a číslována. Chuť je nesmírně komplexní — med, tropické ovoce, tabák, kůže a dřevo se prolínají v dokonalé harmonii."
   }
 ]

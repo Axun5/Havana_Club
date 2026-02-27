@@ -1,4 +1,4 @@
-﻿body {
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -50,11 +50,117 @@ footer p {
 .author-link {
     color: inherit;
     text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
 .author-link:hover {
     color: #FCD667;
 }
+
+.filters {
+    background: white;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.filter-group {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    min-width: 180px;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #D3122A;
+}
+
+.range-inputs {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.range-inputs input {
+    width: 70px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.range-dash {
+    color: #999;
+    font-weight: bold;
+}
+
+button.btn-filter {
+    background-color: #D3122A;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 1em;
+}
+
+button.btn-filter:hover {
+    background-color: #b00f22;
+}
+
+.filter-reset {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.filter-reset-link {
+    color: #777;
+    font-size: 0.9em;
+}
+
+.filter-reset-link:hover {
+    color: #D3122A;
+}
+
+.input-error {
+    border-color: #D3122A !important;
+    background-color: #fff5f5;
+}
+
+.filter-error {
+    display: block;
+    color: #D3122A;
+    font-size: 0.78em;
+    margin-top: 4px;
+    min-height: 1em;
+}
+
+.btn-filter-disabled {
+    background-color: #aaa !important;
+    cursor: not-allowed !important;
+}
+
+.btn-filter-disabled:hover {
+    background-color: #aaa !important;
+}
+
 .add-btn-container {
     text-align: center;
     margin: 20px;
@@ -75,6 +181,7 @@ footer p {
 .btn-add-new:hover {
     transform: scale(1.05);
 }
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -84,14 +191,22 @@ footer p {
     padding: 0 20px;
 }
 
+.no-results {
+    text-align: center;
+    width: 100%;
+    color: #777;
+    font-size: 1.1em;
+    grid-column: 1 / -1;
+}
+
 .card {
     background: white;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.3s;
 }
 
 .card:hover {
@@ -126,6 +241,10 @@ footer p {
     color: #1a1a1a;
 }
 
+.badges {
+    margin-bottom: 10px;
+}
+
 .badges span {
     display: inline-block;
     padding: 4px 8px;
@@ -156,6 +275,7 @@ footer p {
     color: white;
     padding: 5px 15px;
     border-radius: 4px;
+    transition: background-color 0.2s;
 }
 
 .btn-detail:hover {
@@ -167,6 +287,7 @@ footer p {
     padding: 5px 15px;
     border-radius: 4px;
     color: black;
+    transition: background-color 0.2s;
 }
 
 .btn-edit:hover {
@@ -178,11 +299,13 @@ footer p {
     padding: 5px 15px;
     border-radius: 4px;
     color: white;
+    transition: background-color 0.2s;
 }
 
 .btn-delete:hover {
     background-color: #D3122A;
 }
+
 .form-container {
     background: white;
     max-width: 600px;
@@ -210,13 +333,20 @@ footer p {
 }
 
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-family: inherit;
     font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
 }
 
 .form-row {
@@ -227,6 +357,7 @@ footer p {
 .form-half {
     flex: 1;
 }
+
 .drop-zone {
     border: 2px dashed #ccc;
     border-radius: 5px;
@@ -258,6 +389,33 @@ footer p {
     border-radius: 4px;
 }
 
+.image-preview-visible {
+    display: block;
+}
+
+.error-box {
+    background-color: #fff5f5;
+    border: 1px solid #D3122A;
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    color: #D3122A;
+}
+
+.error-box p {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.error-box ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.error-box li {
+    margin-bottom: 5px;
+}
+
 button.submit-btn {
     width: 100%;
     background-color: #D3122A;
@@ -286,41 +444,71 @@ button.submit-btn:hover {
 .back-link:hover {
     color: #D3122A;
 }
+
 .detail-container {
     background: white;
-    max-width: 600px;
+    max-width: 900px;
     margin: 40px auto;
-    padding: 40px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-top: 5px solid #D3122A;
-    text-align: center;
 }
 
 .detail-title {
     color: #D3122A;
+    text-align: center;
     margin-top: 0;
+    margin-bottom: 25px;
     font-size: 1.8em;
 }
 
+.detail-content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
 .detail-image {
-    height: 300px;
+    flex: 0 0 300px;
+    background: radial-gradient(circle, #fff, #eee);
+    padding: 30px;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .detail-image img {
-    max-height: 100%;
+    max-height: 350px;
     max-width: 100%;
     object-fit: contain;
 }
 
+.detail-info {
+    flex: 1;
+}
+
+.detail-description {
+    margin-bottom: 25px;
+}
+
+.detail-description h3 {
+    color: #1a1a1a;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.detail-description p {
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+    font-size: 1em;
+}
+
 .detail-params {
-    max-width: 300px;
-    margin: 0 auto 20px auto;
-    text-align: left;
+    margin-bottom: 20px;
 }
 
 .detail-param {
@@ -350,16 +538,5 @@ button.submit-btn:hover {
     display: flex;
     align-items: center;
     gap: 20px;
-    justify-content: center;
     margin-top: 10px;
-}
-@media (max-width: 600px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-        padding: 0 10px;
-    }
-
-    .form-row {
-        flex-direction: column;
-    }
 }
