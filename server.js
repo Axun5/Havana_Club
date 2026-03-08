@@ -45,6 +45,7 @@ function formatVolume(volume) {
     return volume + " l";
 }
 
+// Posle staticky soubor do prohlizece
 function serveStaticFile(res, filePath) {
     const fullPath = path.join(__dirname, filePath);
     const ext = path.extname(fullPath).toLowerCase();
@@ -72,6 +73,7 @@ function serveStaticFile(res, filePath) {
     });
 }
 
+// Ulozi obrazek z base64 retezce do slozky images
 function saveBase64Image(base64String) {
     if (!base64String) {
         return null;
@@ -190,6 +192,7 @@ function renderMainPage(rums, q) {
         q = {};
     }
 
+    // Filtrovani rumu 
     let filtered = rums;
 
     if (q.minPrice) {
@@ -337,6 +340,7 @@ function renderMainPage(rums, q) {
     `;
 }
 
+
 function renderFormPage(rum) {
     const isEdit = !!rum;
     const action = isEdit ? "/edit/" + rum.id : "/add";
@@ -430,6 +434,7 @@ function renderFormPage(rum) {
     `;
 }
 
+// Vygeneruje detailni stranku jednoho rumu
 function renderDetailPage(rum) {
     const popis = rum.description || "Popis tohoto rumu zatím nebyl přidán.";
 
@@ -488,6 +493,7 @@ const server = http.createServer(function (req, res) {
     const pathName = parsedUrl.pathname;
     const method = req.method;
 
+    // Obsluha statickych souboru (CSS, JS, obrazky)
     if (pathName.startsWith("/public/")) {
         const relativePath = pathName.substring(1);
         return serveStaticFile(res, relativePath);
@@ -495,16 +501,19 @@ const server = http.createServer(function (req, res) {
 
     const rums = loadRums();
 
+    // GET / = hlavni stranka se seznamem rumu
     if (pathName === "/" && method === "GET") {
         const html = renderMainPage(rums, parsedUrl.query);
         return sendHtml(res, html);
     }
 
+    // GET /add = formular pro pridani noveho rumu
     if (pathName === "/add" && method === "GET") {
         const html = renderFormPage(null);
         return sendHtml(res, html);
     }
 
+    // POST /add = zpracovani formulare - ulozeni noveho rumu
     if (pathName === "/add" && method === "POST") {
         let body = "";
 
@@ -568,6 +577,7 @@ const server = http.createServer(function (req, res) {
         return;
     }
 
+    // GET /edit/:id = formular pro upravu existujiciho rumu
     if (pathName.startsWith("/edit/") && method === "GET") {
         const id = Number(pathName.split("/")[2]);
         const rum = rums.find(function (r) {
@@ -582,6 +592,7 @@ const server = http.createServer(function (req, res) {
         return res.end("Rum s tímto ID nebyl nalezen.");
     }
 
+    // POST /edit/:id = ulozeni upravenych udaju rumu
     if (pathName.startsWith("/edit/") && method === "POST") {
         const id = Number(pathName.split("/")[2]);
         let body = "";
@@ -639,6 +650,7 @@ const server = http.createServer(function (req, res) {
         return;
     }
 
+    // GET /delete/:id = smazani rumu podle ID
     if (pathName.startsWith("/delete/") && method === "GET") {
         const id = Number(pathName.split("/")[2]);
 
@@ -654,6 +666,7 @@ const server = http.createServer(function (req, res) {
         return;
     }
 
+    // GET /detail/:id = zobrazeni detailu jednoho rumu
     if (pathName.startsWith("/detail/") && method === "GET") {
         const id = Number(pathName.split("/")[2]);
         const rum = rums.find(function (r) {
@@ -671,6 +684,7 @@ const server = http.createServer(function (req, res) {
     res.writeHead(404);
     res.end("404 - Stránka nenalezena");
 });
+
 
 server.listen(3000, function () {
     console.log("Server běží na http://localhost:3000");

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+﻿document.addEventListener("DOMContentLoaded", function () {
 
     const filterForm = document.getElementById("filterForm");
     const filterBtn = document.getElementById("filterBtn");
@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setupFilterValidation();
     }
 
+    // Pripravi validaci vsech filtrovacich poli
     function setupFilterValidation() {
         const filterPairs = [
             {
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ];
 
+        // Pri kazde zmene vstupu se spusti kontrola
         for (var i = 0; i < filterPairs.length; i++) {
             var pair = filterPairs[i];
 
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         validateAllFilters(filterPairs);
     }
 
+    // Zkontroluje vsechny filtry - nesmi byt zaporne a "od" musi byt mensi nez "do"
     function validateAllFilters(filterPairs) {
         var hasError = false;
 
@@ -111,14 +114,17 @@ document.addEventListener("DOMContentLoaded", function () {
             filterBtn.classList.remove("btn-filter-disabled");
         }
     }
+  
     const dropZone = document.getElementById("dropZone");
     const fileInput = document.getElementById("fileInput");
     const preview = document.getElementById("imagePreview");
     const hiddenInput = document.getElementById("hiddenImageData");
 
+
     if (!dropZone) {
         return;
     }
+
 
     dropZone.addEventListener("click", function () {
         fileInput.click();
@@ -139,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dropZone.style.backgroundColor = "transparent";
     });
 
+
     dropZone.addEventListener("drop", function (e) {
         e.preventDefault();
         dropZone.style.borderColor = "#ccc";
@@ -150,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Nacte vybrany obrazek, zobrazi nahled a ulozi data
     function handleFileSelect() {
         const file = fileInput.files[0];
 
